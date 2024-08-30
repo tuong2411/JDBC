@@ -1,0 +1,39 @@
+package vn.ManhTuong.ConTrollers;
+
+import java.io.IOException;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+@WebServlet(urlPatterns = ("/login"))
+public class LoginController extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String site = new String("view/Login.jsp");
+		resp.sendRedirect(site);
+		RequestDispatcher rd = req.getRequestDispatcher("/idex.html");
+		rd.forward(req, resp);
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String name = req.getParameter("uname");
+		String pass = req.getParameter("psw");
+
+		req.setAttribute("username", name);
+		req.setAttribute("password", pass);
+
+		RequestDispatcher rd = req.getRequestDispatcher("view/home.jsp");
+		rd.forward(req, resp);
+	}
+}
